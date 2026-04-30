@@ -12,6 +12,12 @@ namespace TrafficLightControlSystem.Core
 
         public Signal EastWest { get; private set; } = Signal.Red;
 
+        public Signal North => NorthSouth;
+        public Signal South => NorthSouth;
+
+        public Signal East => EastWest;
+        public Signal West => EastWest;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (direction == Direction.NorthSouth)
