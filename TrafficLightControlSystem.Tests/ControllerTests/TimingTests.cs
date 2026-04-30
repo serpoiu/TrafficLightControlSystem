@@ -88,5 +88,20 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.Equal(Signal.Amber, controller.NorthSouth);
         }
+
+        [Fact]
+        public void Green_ShouldRemainIndefinitely_WhenNoOpposingTrafficAndNoPedestrianRequest()
+        {
+            var controller = new TrafficLightController();
+
+            controller.SetOpposingTraffic(false);
+
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+
+            controller.Tick(TimeSpan.FromSeconds(60));
+
+            Assert.Equal(Signal.Green, controller.NorthSouth);
+        }
     }
 }
