@@ -20,6 +20,8 @@ namespace TrafficLightControlSystem.Core
 
         private TimeSpan _timeSpentInCurrentSignal = TimeSpan.Zero;
 
+        private bool _opposingTrafficWaiting;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (direction == Direction.NorthSouth)
@@ -77,7 +79,17 @@ namespace TrafficLightControlSystem.Core
             {
                 ChangeToNextSignal(Direction.NorthSouth);
             }
+
+            if (NorthSouth == Signal.Green && _opposingTrafficWaiting &&
+                _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(30))
+            {
+                ChangeToNextSignal(Direction.NorthSouth);
+            }
         }
 
+        public void SetOpposingTraffic(bool isWaiting)
+        {
+            _opposingTrafficWaiting = isWaiting;
+        }
     }
 }

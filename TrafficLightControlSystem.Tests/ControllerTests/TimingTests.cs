@@ -58,5 +58,35 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.Equal(Signal.Red, controller.NorthSouth);
         }
+
+        [Fact]
+        public void Green_ShouldNotChangeBeforeThirtySeconds_WhenOpposingTrafficPresent()
+        {
+            var controller = new TrafficLightController();
+
+            controller.SetOpposingTraffic(true);
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+
+            controller.Tick(TimeSpan.FromSeconds(29));
+
+            Assert.Equal(Signal.Green, controller.NorthSouth);
+        }
+
+        [Fact]
+        public void Green_ShouldChangeAfterThirtySeconds_WhenOpposingTrafficPresent()
+        {
+            var controller = new TrafficLightController();
+
+            controller.SetOpposingTraffic(true);
+
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+
+            controller.Tick(TimeSpan.FromSeconds(30));
+
+            Assert.Equal(Signal.Amber, controller.NorthSouth);
+        }
     }
 }
