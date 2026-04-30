@@ -23,5 +23,15 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.Equal(Signal.Amber, controller.NorthSouth);
         }
+
+        [Fact]
+        public void SensorFailure_ShouldRaiseSensorFaultAlert()
+        {
+            var controller = new TrafficLightController();
+
+            controller.TriggerSensorFailure();
+
+            Assert.True(controller.SensorFaultAlert);
+        }
     }
 }

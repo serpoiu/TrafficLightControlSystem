@@ -44,6 +44,8 @@ namespace TrafficLightControlSystem.Core
 
         private bool _sensorFailure;
 
+        public bool SensorFaultAlert => _sensorFailure;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (_hasFault)
