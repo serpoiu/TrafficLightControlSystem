@@ -11,6 +11,7 @@ namespace TrafficLightControlSystem.Tests
 {
     public sealed class TrafficLightControllerTests
     {
+        // state transition tests
         [Fact]
         public void NewController_StartsWithBothDirectionsRed()
         {
@@ -118,6 +119,43 @@ namespace TrafficLightControlSystem.Tests
 
             Assert.Equal(Signal.Red, controller.NorthSouth);
             Assert.Equal(Signal.Red, controller.EastWest);
+        }
+
+        // Safety Invariant tests
+        [Fact]
+        public void ChangeToNextSignal_WhenNorthSouthBecomesActive_EastWestRemainsRed()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+
+            bool northSouthActive =
+                controller.NorthSouth == Signal.RedAmber ||
+                controller.NorthSouth == Signal.Green ||
+                controller.NorthSouth == Signal.Amber;
+
+            if (northSouthActive)
+            {
+                Assert.Equal(Signal.Red, controller.EastWest);
+            }
+        }
+
+        [Fact]
+        public void ChangeToNextSignal_WhenEastWestBecomesActive_NorthSouthRemainsRed()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.EastWest);
+
+            bool eastWestActive =
+                controller.EastWest == Signal.RedAmber ||
+                controller.EastWest == Signal.Green ||
+                controller.EastWest == Signal.Amber;
+
+            if (eastWestActive)
+            {
+                Assert.Equal(Signal.Red, controller.NorthSouth);
+            }
         }
     }
 }
