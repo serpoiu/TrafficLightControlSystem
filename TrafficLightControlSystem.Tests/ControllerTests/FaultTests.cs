@@ -60,5 +60,15 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
             Assert.Equal(Signal.Off, controller.EastWest);
             Assert.True(controller.HasFault);
         }
+
+        [Fact]
+        public void FaultOffState_ShouldRaiseFaultAlert()
+        {
+            var controller = new TrafficLightController();
+
+            controller.TriggerSignalProgressionFailure();
+
+            Assert.True(controller.FaultAlert);
+        }
     }
 }

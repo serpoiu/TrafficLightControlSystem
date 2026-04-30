@@ -40,6 +40,8 @@ namespace TrafficLightControlSystem.Core
 
         public bool HasFault => _hasFault;
 
+        public bool FaultAlert => _hasFault;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (_hasFault)
