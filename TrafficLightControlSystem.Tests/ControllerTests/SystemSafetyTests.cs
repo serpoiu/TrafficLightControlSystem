@@ -25,6 +25,38 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
         }
 
         [Fact]
+        public void System_ShouldNeveAllowBothDirectionsRedAmber()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            
+
+            controller.ChangeToNextSignal(Direction.EastWest);
+            
+
+            Assert.Equal(Signal.RedAmber, controller.NorthSouth);
+            Assert.True(controller.EastWest == Signal.Red);
+        }
+
+        [Fact]
+        public void System_ShouldNeveAllowBothDirectionsAmber()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+
+            controller.ChangeToNextSignal(Direction.EastWest);
+            controller.ChangeToNextSignal(Direction.EastWest);
+            controller.ChangeToNextSignal(Direction.EastWest);
+
+            Assert.Equal(Signal.Amber, controller.NorthSouth);
+            Assert.True(controller.EastWest == Signal.Red);
+        }
+
+        [Fact]
         public void System_ShouldNotAllowTrafficDuringPedestrianCrossing()
         {
             var controller = new TrafficLightController();
