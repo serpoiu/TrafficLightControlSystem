@@ -70,5 +70,18 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.True(controller.FaultAlert);
         }
+
+        [Fact]
+        public void FaultOffState_ShouldSetAllLightsOff()
+        {
+            var controller = new TrafficLightController();
+
+            controller.TriggerSignalProgressionFailure();
+
+            Assert.Equal(Signal.Off, controller.North);
+            Assert.Equal(Signal.Off, controller.South);
+            Assert.Equal(Signal.Off, controller.East);
+            Assert.Equal(Signal.Off, controller.West);
+        }
     }
 }
