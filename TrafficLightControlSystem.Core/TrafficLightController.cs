@@ -34,6 +34,12 @@ namespace TrafficLightControlSystem.Core
 
         public bool PedestrianLight => _isPedestrianCrossingActive;
 
+        public bool HasPendingPedestrianRequest => _pedestrianRequestPending;
+
+        private bool _hasFault;
+
+        public bool HasFault => _hasFault;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (direction == Direction.NorthSouth)
@@ -144,6 +150,16 @@ namespace TrafficLightControlSystem.Core
             _pedestrianRequestPending = true;
         }
 
-        public bool HasPendingPedestrianRequest => _pedestrianRequestPending;
+        public void TriggerSignalProgressionFailure()
+        {
+            EnterFaultState();
+        }
+
+        public void EnterFaultState()
+        { 
+            _hasFault = true;
+            NorthSouth = Signal.Off;
+            EastWest = Signal.Off;
+        }
     }
 }
