@@ -100,7 +100,7 @@ namespace TrafficLightControlSystem.Core
 
             if (signal == Signal.Green)
             {
-                return _opposingTrafficWaiting &&
+                return (_opposingTrafficWaiting || _pedestrianRequestPending) &&
                        _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(30);
             }
 

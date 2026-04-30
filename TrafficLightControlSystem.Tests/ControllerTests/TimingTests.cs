@@ -118,5 +118,20 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.Equal(Signal.Amber, controller.EastWest);
         }
+
+        [Fact]
+        public void Green_ShouldChangeAfterThirtySeconds_WhenPedestrianRequestPending()
+        {
+            var controller = new TrafficLightController();
+
+            controller.RequestPedestrianCrossing();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+
+            controller.Tick(TimeSpan.FromSeconds(30));
+
+            Assert.Equal(Signal.Amber, controller.NorthSouth);
+        }
     }
 }
