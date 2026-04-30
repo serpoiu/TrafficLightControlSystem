@@ -42,5 +42,18 @@ namespace TrafficLightControlSystem.Tests
             Assert.Equal(Signal.Green, controller.NorthSouth);
             Assert.Equal(Signal.Red, controller.EastWest);
         }
+
+        [Fact]
+        public void ChangeToNextSignal_WhenNorthSouthIsGreen_ChangesToAmber()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+
+            Assert.Equal(Signal.Amber, controller.NorthSouth);
+            Assert.Equal(Signal.Red, controller.EastWest);
+        }
     }
 }

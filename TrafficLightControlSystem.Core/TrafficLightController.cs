@@ -20,6 +20,7 @@ namespace TrafficLightControlSystem.Core
                 {
                     Signal.Red => Signal.RedAmber,
                     Signal.RedAmber => Signal.Green,
+                    Signal.Green => Signal.Amber,
                     _ => NorthSouth
                 };
             }
