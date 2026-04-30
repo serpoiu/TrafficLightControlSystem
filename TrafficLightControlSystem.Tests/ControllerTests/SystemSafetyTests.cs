@@ -48,5 +48,20 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
             Assert.Equal(Signal.Off, controller.NorthSouth);
             Assert.Equal(Signal.Off, controller.EastWest);
         }
+
+        [Fact]
+        public void System_ShouldBlockEastWestProgression_WhenNorthSouthIsActive()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+
+            controller.ChangeToNextSignal(Direction.EastWest);
+            controller.ChangeToNextSignal(Direction.EastWest);
+
+            Assert.Equal(Signal.Green, controller.NorthSouth);
+            Assert.Equal(Signal.Red, controller.EastWest);
+        }
     }
 }
