@@ -16,11 +16,21 @@ namespace TrafficLightControlSystem.Core
         {
             if (direction == Direction.NorthSouth)
             {
+                if (IsActive(EastWest))
+                {
+                    return;
+                }
+
                 NorthSouth = GetNextSignal(NorthSouth);
             }
 
             if (direction == Direction.EastWest)
             {
+                if (IsActive(NorthSouth))
+                {
+                    return;
+                }
+
                 EastWest = GetNextSignal(EastWest);
             }
         }
@@ -35,6 +45,13 @@ namespace TrafficLightControlSystem.Core
                 Signal.Amber => Signal.Red,
                 _ => signal
             };
+        }
+
+        private static bool IsActive(Signal signal)
+        { 
+            return signal == Signal.RedAmber ||
+                signal == Signal.Green ||
+                signal == Signal.Amber;
         }
     }
 }

@@ -157,5 +157,18 @@ namespace TrafficLightControlSystem.Tests
                 Assert.Equal(Signal.Red, controller.NorthSouth);
             }
         }
+
+        [Fact]
+        public void ChangeToNextSignal_WhenOpposingDirectionIsActive_DoesNotAllowConflictingFlow()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+
+            controller.ChangeToNextSignal(Direction.EastWest);
+
+            Assert.Equal(Signal.RedAmber, controller.NorthSouth);
+            Assert.Equal(Signal.Red, controller.EastWest);
+        }
     }
 }
