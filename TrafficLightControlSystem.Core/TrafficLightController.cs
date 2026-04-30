@@ -42,6 +42,8 @@ namespace TrafficLightControlSystem.Core
 
         public bool FaultAlert => _hasFault;
 
+        private bool _sensorFailure;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (_hasFault)
@@ -149,8 +151,8 @@ namespace TrafficLightControlSystem.Core
 
             if (signal == Signal.Green)
             {
-                return (_opposingTrafficWaiting || _pedestrianRequestPending) &&
-                       _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(30);
+                return (_opposingTrafficWaiting || _pedestrianRequestPending || _sensorFailure)
+                    && _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(30);
             }
 
             return false;
@@ -181,6 +183,11 @@ namespace TrafficLightControlSystem.Core
         public void TriggerLightDeIlluminationFailure()
         {
             EnterFaultState();
+        }
+
+        public void TriggerSensorFailure()
+        { 
+            _sensorFailure = true;
         }
     }
 }
