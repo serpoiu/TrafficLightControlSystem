@@ -38,5 +38,30 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.True(controller.IsPedestrianCrossingActive);
         }
+
+        [Fact]
+        public void PedestrianCrossing_ShouldKeepBothDirectionsRed()
+        {
+            var controller = new TrafficLightController();
+
+            controller.RequestPedestrianCrossing();
+            controller.Tick(TimeSpan.Zero);
+
+            Assert.True(controller.IsPedestrianCrossingActive);
+            Assert.Equal(Signal.Red, controller.NorthSouth);
+            Assert.Equal(Signal.Red, controller.EastWest);
+        }
+
+        [Fact]
+        public void PedestrianCrossing_ShouldActivateAlertAndLight()
+        {
+            var controller = new TrafficLightController();
+
+            controller.RequestPedestrianCrossing();
+            controller.Tick(TimeSpan.Zero);
+
+            Assert.True(controller.PedestrianAlert);
+            Assert.True(controller.PedestrianLight);
+        }
     }
 }

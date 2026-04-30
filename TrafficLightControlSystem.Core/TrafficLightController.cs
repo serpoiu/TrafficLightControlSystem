@@ -28,6 +28,10 @@ namespace TrafficLightControlSystem.Core
 
         public bool IsPedestrianCrossingActive => _isPedestrianCrossingActive;
 
+        public bool PedestrianAlert => _isPedestrianCrossingActive;
+
+        public bool PedestrianLight => _isPedestrianCrossingActive;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (direction == Direction.NorthSouth)
