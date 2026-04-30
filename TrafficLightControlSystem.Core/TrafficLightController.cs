@@ -161,5 +161,15 @@ namespace TrafficLightControlSystem.Core
             NorthSouth = Signal.Off;
             EastWest = Signal.Off;
         }
+
+        public void TriggerLightIlluminationFailure()
+        {
+            EnterFaultState();
+        }
+
+        public void TriggerLightDeIlluminationFailure()
+        {
+            EnterFaultState();
+        }
     }
 }

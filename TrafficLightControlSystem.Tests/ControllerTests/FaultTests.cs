@@ -20,5 +20,29 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
             Assert.Equal(Signal.Off, controller.EastWest);
             Assert.True(controller.HasFault);
         }
+
+        [Fact]
+        public void LightIlluminationFailure_ShouldEnterFaultOffState()
+        {
+            var controller = new TrafficLightController();
+
+            controller.TriggerLightIlluminationFailure();
+
+            Assert.Equal(Signal.Off, controller.NorthSouth);
+            Assert.Equal(Signal.Off, controller.EastWest);
+            Assert.True(controller.HasFault);
+        }
+
+        [Fact]
+        public void LightDeIlluminationFailure_ShouldEnterFaultOffState()
+        {
+            var controller = new TrafficLightController();
+
+            controller.TriggerLightDeIlluminationFailure();
+
+            Assert.Equal(Signal.Off, controller.NorthSouth);
+            Assert.Equal(Signal.Off, controller.EastWest);
+            Assert.True(controller.HasFault);
+        }
     }
 }
