@@ -10,23 +10,23 @@ This document maps requirements to formal specifications, hazards, tests, and im
 
 | Requirement ID | Formal Element | Hazard | Test Case | Implementation Unit |
 |---|---|---|---|---|
-|Req-01| System Model			| Haz-01 | System initialisation test		| Controller |
-|Req-02| Pair synchronisation	| Haz-03 | NS sync test						| Controller |
-|Req-03| Pair synchronisation	| Haz-03 | EW sync test						| Controller |
-|Req-04| Transitions			| Haz-05 | Red -> RedAmber test				| State Machine |
-|Req-05| Transitions			| Haz-05 | RedAmber -> Green test			| State Machine |
-|Req-06| Transitions			| Haz-05 | Green -> Amber test				| State Machine |
-|Req-07| Transitions			| Haz-05 | Amber -> Red test				| State Machine |
-|Req-08| Timing					| Haz-05 | RedAmber timing test				| Timer |
-|Req-09| Timing					| Haz-05 | Amber timing test				| Timer |
-|Req-10| Timing					| Haz-04 | Green limited timing test		| Timer |
-|Req-11| Green constraint		| Haz-08 | Idefinited Green constraint test | Controller |
-|Req-12| Pedestrian behaviour	| Haz-02 | Pedestrian request queue test	| Controller |
-|Req-13| Pedestrian invariant	| Haz-02 | All Red during crossing test		| Controller |
-|Req-14| Timing					| Haz-02 | Pedestrian duration test			| Timer |
-|Req-15| Pedestrian behaviour	| Haz-02 | Pedestrian alert test			| Controller |
-|Req-16| Pedestrian behaviour	| Haz-02 | Pedestrian light test			| Controller |
-|Req-17| Pedestrian behaviour	| Haz-02 | Resume operation test			| Controller |
+|Req-01| System Model			| Haz-01 | NewController_StartsWithBothDirectionsRed									| Controller |
+|Req-02| Pair synchronisation	| Haz-03 | NorthSouthPair_ShouldShowTheSameSignalForNorthAndSouth						| Controller |
+|Req-03| Pair synchronisation	| Haz-03 | EastWestPair_ShouldShowTheSameSignalForEastAndWest							| Controller |
+|Req-04| Transitions			| Haz-05 | ChangeToNextSignal_WhenNorthSouthIsRed_ChangesToRedAmber						| State Machine |
+|Req-05| Transitions			| Haz-05 | ChangeToNextSignal_WhenNorthSouthIsRedAmber_ChangesToGreen					| State Machine |
+|Req-06| Transitions			| Haz-05 | ChangeToNextSignal_WhenNorthSouthIsGreen_ChangesToAmber						| State Machine |
+|Req-07| Transitions			| Haz-05 | ChangeToNextSignal_WhenNorthSouthIsAmber_ChangesToRed						| State Machine |
+|Req-08| Timing					| Haz-05 | RedAmber_ShouldChangeAfterOnePointSeconds     								| Timer |
+|Req-09| Timing					| Haz-05 | Amber_ShouldChangeAfterOnePointFiveSeconds									| Timer |
+|Req-10| Timing					| Haz-04 | Green_ShouldChangeAfterThirtySeconds_WhenOpposingTrafficPresent				| Timer |
+|Req-11| Green constraint		| Haz-08 | Green_ShouldRemainIndefinitely_WhenNoOpposingTrafficAndNoPedestrianRequest	| Controller |
+|Req-12| Pedestrian behaviour	| Haz-02 | PedestrianRequest_ShouldBeQueued												| Controller |
+|Req-13| Pedestrian invariant	| Haz-02 | PedestrianCrossing_ShouldKeepBothDirectionsRed								| Controller |
+|Req-14| Timing					| Haz-02 | PedestrianCrossing_ShouldEndAfterFifteenSeconds								| Timer |
+|Req-15| Pedestrian behaviour	| Haz-02 | PedestrianCrossing_ShouldActivateAlertAndLight								| Controller |
+|Req-16| Pedestrian behaviour	| Haz-02 | PedestrianCrossing_ShouldActivateAlertAndLight								| Controller |
+|Req-17| Pedestrian behaviour	| Haz-02 | PedestrianCrossing_ShouldEndAfterFifteenSeconds								| Controller |
 |Req-18| Monitoring				| Haz-06 | Signal state monitoring test		| Controller |
 |Req-19| Monitoring				| Haz-04 | Sensor monitoring test			| Controller |
 |Req-20| Monitoring				| Haz-08 | Pedestrian status test			| Controller |
