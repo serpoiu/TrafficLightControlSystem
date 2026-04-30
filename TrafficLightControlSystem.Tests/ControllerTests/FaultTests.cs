@@ -44,5 +44,21 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
             Assert.Equal(Signal.Off, controller.EastWest);
             Assert.True(controller.HasFault);
         }
+
+        [Fact]
+        public void FaultState_ShouldNotRecoverAutomatecally()
+        {
+            var controller = new TrafficLightController();
+
+            controller.TriggerSignalProgressionFailure();
+            controller.Tick(TimeSpan.FromSeconds(60));
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            controller.Tick(TimeSpan.FromSeconds(60));
+            controller.ChangeToNextSignal(Direction.EastWest);
+
+            Assert.Equal(Signal.Off, controller.NorthSouth);
+            Assert.Equal(Signal.Off, controller.EastWest);
+            Assert.True(controller.HasFault);
+        }
     }
 }

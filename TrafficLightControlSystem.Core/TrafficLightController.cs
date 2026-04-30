@@ -42,6 +42,12 @@ namespace TrafficLightControlSystem.Core
 
         public void ChangeToNextSignal(Direction direction)
         {
+            if (_hasFault)
+            {
+                return;
+            }
+
+
             if (direction == Direction.NorthSouth)
             {
                 if (IsActive(EastWest))
@@ -85,8 +91,11 @@ namespace TrafficLightControlSystem.Core
         }
 
         public void Tick(TimeSpan timeSpent)
-        { 
-            
+        {
+            if (_hasFault)
+            {
+                return;
+            }
 
             if (_isPedestrianCrossingActive)
             {
