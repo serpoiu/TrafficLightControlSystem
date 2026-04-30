@@ -22,6 +22,8 @@ namespace TrafficLightControlSystem.Core
 
         private bool _opposingTrafficWaiting;
 
+        private bool _pedestrianRequestPending;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (direction == Direction.NorthSouth)
@@ -104,5 +106,12 @@ namespace TrafficLightControlSystem.Core
 
             return false;
         }
+
+        public void RequestPedestrianCrossing()
+        {
+            _pedestrianRequestPending = true;
+        }
+
+        public bool HasPendingPedestrianRequest => _pedestrianRequestPending;
     }
 }
