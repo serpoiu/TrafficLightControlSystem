@@ -26,6 +26,8 @@ namespace TrafficLightControlSystem.Core
 
         private bool _isPedestrianCrossingActive;
 
+        private TimeSpan _pedestrianTimeSpent = TimeSpan.Zero;
+
         public bool IsPedestrianCrossingActive => _isPedestrianCrossingActive;
 
         public bool PedestrianAlert => _isPedestrianCrossingActive;
@@ -78,6 +80,21 @@ namespace TrafficLightControlSystem.Core
 
         public void Tick(TimeSpan timeSpent)
         { 
+            
+
+            if (_isPedestrianCrossingActive)
+            {
+                _pedestrianTimeSpent += timeSpent;
+
+                if (_pedestrianTimeSpent >= TimeSpan.FromSeconds(15))
+                {
+                    _isPedestrianCrossingActive = false;
+                    _pedestrianTimeSpent = TimeSpan.Zero;
+                }
+
+                return;
+            }
+
             _timeSpentInCurrentSignal += timeSpent;
 
             if (ShouldAdvance(NorthSouth))

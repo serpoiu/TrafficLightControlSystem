@@ -63,5 +63,18 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
             Assert.True(controller.PedestrianAlert);
             Assert.True(controller.PedestrianLight);
         }
+
+        [Fact]
+        public void PedestrianCrossing_ShouldEndAfterFifteenSeconds()
+        {
+            var controller = new TrafficLightController();
+
+            controller.RequestPedestrianCrossing();
+            controller.Tick(TimeSpan.Zero);
+
+            controller.Tick(TimeSpan.FromSeconds(15));
+
+            Assert.False(controller.IsPedestrianCrossingActive);
+        }
     }
 }
