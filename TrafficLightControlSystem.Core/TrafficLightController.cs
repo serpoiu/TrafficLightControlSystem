@@ -70,26 +70,39 @@ namespace TrafficLightControlSystem.Core
         { 
             _timeSpentInCurrentSignal += timeSpent;
 
-            if (NorthSouth == Signal.RedAmber && _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(1.5))
+            if (ShouldAdvance(NorthSouth))
             {
                 ChangeToNextSignal(Direction.NorthSouth);
+                return;
             }
 
-            if (NorthSouth == Signal.Amber && _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(1.5))
+            if (ShouldAdvance(EastWest))
             {
-                ChangeToNextSignal(Direction.NorthSouth);
+                ChangeToNextSignal(Direction.EastWest);
+                return;
             }
 
-            if (NorthSouth == Signal.Green && _opposingTrafficWaiting &&
-                _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(30))
-            {
-                ChangeToNextSignal(Direction.NorthSouth);
-            }
         }
 
         public void SetOpposingTraffic(bool isWaiting)
         {
             _opposingTrafficWaiting = isWaiting;
+        }
+
+        private bool ShouldAdvance(Signal signal)
+        {
+            if (signal == Signal.RedAmber || signal == Signal.Amber)
+            { 
+                return _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(1.5);
+            }
+
+            if (signal == Signal.Green)
+            {
+                return _opposingTrafficWaiting &&
+                       _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(30);
+            }
+
+            return false;
         }
     }
 }

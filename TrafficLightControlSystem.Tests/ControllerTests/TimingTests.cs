@@ -103,5 +103,20 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.Equal(Signal.Green, controller.NorthSouth);
         }
+
+        [Fact]
+        public void EastWest_GreenTiming_ShouldMatchNorthSouthBehaviour()
+        {
+            var controller = new TrafficLightController();
+
+            controller.SetOpposingTraffic(true);
+
+            controller.ChangeToNextSignal(Direction.EastWest); 
+            controller.ChangeToNextSignal(Direction.EastWest); 
+
+            controller.Tick(TimeSpan.FromSeconds(30));
+
+            Assert.Equal(Signal.Amber, controller.EastWest);
+        }
     }
 }
