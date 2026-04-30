@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TrafficLightControlSystem.Core
 {
-    internal class TrafficLightController
+    public class TrafficLightController
     {
+        public Signal NorthSouth { get; private set; } = Signal.Red;
+
+        public Signal EastWest { get; private set; } = Signal.Red;
     }
 }

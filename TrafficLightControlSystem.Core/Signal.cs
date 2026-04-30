@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace TrafficLightControlSystem.Core
 {
-    internal class Signal
+    public enum Signal
     {
+        Red,
+        RedAmber,
+        Green,
+        Amber,
+        Off
     }
 }

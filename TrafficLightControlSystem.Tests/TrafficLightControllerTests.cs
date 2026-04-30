@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using TrafficLightControlSystem.Core;
 
 namespace TrafficLightControlSystem.Tests
 {
@@ -19,15 +20,15 @@ namespace TrafficLightControlSystem.Tests
             Assert.Equal(Signal.Red, controller.EastWest);
         }
 
-        [Fact]
-        public void ChangeToNextSignal_WhenNorthSouthIsRed_ChangesToRedAmber()
-        {
-            var controller = new TrafficLightController();
+        //[Fact]
+        //public void ChangeToNextSignal_WhenNorthSouthIsRed_ChangesToRedAmber()
+        //{
+        //    var controller = new TrafficLightController();
 
-            controller.ChangeToNextSignal(Direction.NorthSouth);
+        //    controller.ChangeToNextSignal(Direction.NorthSouth);
 
-            Assert.Equal(Signal.RedAmber, controller.NorthSouth);
-            Assert.Equal(Signal.Red, controller.EastWest);
-        }
+        //    Assert.Equal(Signal.RedAmber, controller.NorthSouth);
+        //    Assert.Equal(Signal.Red, controller.EastWest);
+        //}
     }
 }

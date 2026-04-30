@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace TrafficLightControlSystem.Core
 {
-    internal class Direction
+    public enum Direction
     {
+        NorthSouth,
+        EastWest
     }
 }
