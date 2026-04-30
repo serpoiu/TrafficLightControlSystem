@@ -16,15 +16,25 @@ namespace TrafficLightControlSystem.Core
         {
             if (direction == Direction.NorthSouth)
             {
-                NorthSouth = NorthSouth switch
-                {
-                    Signal.Red => Signal.RedAmber,
-                    Signal.RedAmber => Signal.Green,
-                    Signal.Green => Signal.Amber,
-                    Signal.Amber => Signal.Red,
-                    _ => NorthSouth
-                };
+                NorthSouth = GetNextSignal(NorthSouth);
             }
+
+            if (direction == Direction.EastWest)
+            {
+                EastWest = GetNextSignal(EastWest);
+            }
+        }
+
+        private static Signal GetNextSignal(Signal signal)
+        {
+            return signal switch
+            {
+                Signal.Red => Signal.RedAmber,
+                Signal.RedAmber => Signal.Green,
+                Signal.Green => Signal.Amber,
+                Signal.Amber => Signal.Red,
+                _ => signal
+            };
         }
     }
 }
