@@ -18,5 +18,25 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.True(controller.HasPendingPedestrianRequest);
         }
+
+
+        [Fact]
+        public void PedestrianCrossing_ShouldActivateAtNextAllRed()
+        {
+            var controller = new TrafficLightController();
+
+            controller.RequestPedestrianCrossing();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+            controller.ChangeToNextSignal(Direction.NorthSouth); 
+
+            // At this point both directions red
+
+            controller.Tick(TimeSpan.Zero);
+
+            Assert.True(controller.IsPedestrianCrossingActive);
+        }
     }
 }
