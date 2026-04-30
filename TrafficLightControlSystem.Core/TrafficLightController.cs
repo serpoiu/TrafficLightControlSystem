@@ -18,6 +18,8 @@ namespace TrafficLightControlSystem.Core
         public Signal East => EastWest;
         public Signal West => EastWest;
 
+        private TimeSpan _timeSpentInCurrentSignal = TimeSpan.Zero;
+
         public void ChangeToNextSignal(Direction direction)
         {
             if (direction == Direction.NorthSouth)
@@ -28,6 +30,7 @@ namespace TrafficLightControlSystem.Core
                 }
 
                 NorthSouth = GetNextSignal(NorthSouth);
+                _timeSpentInCurrentSignal = TimeSpan.Zero;
             }
 
             if (direction == Direction.EastWest)
@@ -38,6 +41,7 @@ namespace TrafficLightControlSystem.Core
                 }
 
                 EastWest = GetNextSignal(EastWest);
+                _timeSpentInCurrentSignal = TimeSpan.Zero;
             }
         }
 
@@ -62,7 +66,12 @@ namespace TrafficLightControlSystem.Core
 
         public void Tick(TimeSpan timeSpent)
         { 
-        
+            _timeSpentInCurrentSignal += timeSpent;
+
+            if (NorthSouth == Signal.RedAmber && _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(1.5))
+            {
+                ChangeToNextSignal(Direction.NorthSouth);
+            }
         }
 
     }

@@ -19,5 +19,16 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
 
             Assert.Equal(Signal.RedAmber, controller.NorthSouth);
         }
+
+        [Fact]
+        public void RedAmber_ShouldChangeAfterOnePointSeconds()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+            controller.Tick(TimeSpan.FromSeconds(1.5));
+
+            Assert.Equal(Signal.Green, controller.NorthSouth);
+        }
     }
 }
