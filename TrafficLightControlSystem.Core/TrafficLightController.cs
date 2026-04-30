@@ -21,6 +21,7 @@ namespace TrafficLightControlSystem.Core
                     Signal.Red => Signal.RedAmber,
                     Signal.RedAmber => Signal.Green,
                     Signal.Green => Signal.Amber,
+                    Signal.Amber => Signal.Red,
                     _ => NorthSouth
                 };
             }
