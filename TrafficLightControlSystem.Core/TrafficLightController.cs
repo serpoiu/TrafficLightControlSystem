@@ -72,6 +72,11 @@ namespace TrafficLightControlSystem.Core
             {
                 ChangeToNextSignal(Direction.NorthSouth);
             }
+
+            if (NorthSouth == Signal.Amber && _timeSpentInCurrentSignal >= TimeSpan.FromSeconds(1.5))
+            {
+                ChangeToNextSignal(Direction.NorthSouth);
+            }
         }
 
     }
