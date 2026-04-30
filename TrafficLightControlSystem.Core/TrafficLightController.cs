@@ -59,5 +59,11 @@ namespace TrafficLightControlSystem.Core
                 signal == Signal.Green ||
                 signal == Signal.Amber;
         }
+
+        public void Tick(TimeSpan timeSpent)
+        { 
+        
+        }
+
     }
 }
