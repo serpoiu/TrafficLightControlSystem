@@ -95,5 +95,19 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
             Assert.Equal(Signal.Green, controller.NorthSouth);
             Assert.Equal(Signal.Red, controller.EastWest);
         }
+
+        [Fact]
+        public void System_ShouldBlockTransition_WhenItWouldCreateUnsafeState()
+        {
+            var controller = new TrafficLightController();
+
+            controller.ChangeToNextSignal(Direction.NorthSouth);
+
+            var before = controller.EastWest;
+
+            controller.ChangeToNextSignal(Direction.EastWest);
+
+            Assert.Equal(before, controller.EastWest);
+        }
     }
 }
