@@ -109,5 +109,18 @@ namespace TrafficLightControlSystem.Tests.ControllerTests
             Assert.Equal(Signal.Red, controller.NorthSouth);
             Assert.Equal(Signal.Red, controller.EastWest);
         }
+
+        [Fact]
+        public void ChangeToNextSignal_ShouldBeDeterministic_ForSameInitialState()
+        {
+            var controller1 = new TrafficLightController();
+            var controller2 = new TrafficLightController();
+
+            controller1.ChangeToNextSignal(Direction.NorthSouth);
+            controller2.ChangeToNextSignal(Direction.NorthSouth);
+
+            Assert.Equal(controller1.NorthSouth, controller2.NorthSouth);
+            Assert.Equal(controller1.EastWest, controller2.EastWest);
+        }
     }
 }
